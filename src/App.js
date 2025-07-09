@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { ProtectedRoute, AdminRoute } from './service/Guard';
 import Navbar from './component/common/Navbar';
 import { CartProvider } from './component/context/CartContext';
