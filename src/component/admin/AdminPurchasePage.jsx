@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../style/admin.css';
-import Pagination from "../common/pagination";
+//import Pagination from "../common/pagination";
 import ApiService from "../../service/ApiService";
 
-const PurchaseStatus = ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED", "RETURNED"];
+//const PurchaseStatus = ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED", "RETURNED"];
 
-const getPurchaseStatusClass = (status) => {
+/*const getPurchaseStatusClass = (status) => {
     switch(status) {
         case 'PENDING': return 'status-pending';
         case 'CONFIRMED': return 'status-confirmed';
@@ -16,17 +16,17 @@ const getPurchaseStatusClass = (status) => {
         case 'RETURNED': return 'status-returned';
         default: return '';
     }
-};
+};*/
 
 const AdminPurchasesPage = () => {
-    const [purchases, setPurchases] = useState([]);
-    const [filteredPurchases, setFilteredPurchases] = useState([]);
+    //const [purchases, setPurchases] = useState([]);
+    //const [filteredPurchases, setFilteredPurchases] = useState([]);
     const [statusFilter, setStatusFilter] = useState('');
-    const [searchStatus, setSearchStatus] = useState('');
-    const [loading, setLoading] = useState(true);
+    //const [searchStatus, setSearchStatus] = useState('');
+    //const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-    const [error, setError] = useState(null);
+    //const [totalPages, setTotalPages] = useState(0);
+    //const [error, setError] = useState(null);
     const itemsPerPage = 10;
 
     const navigate = useNavigate();
@@ -53,20 +53,20 @@ const AdminPurchasesPage = () => {
         fetchPurchases();
     }, [fetchPurchases]);
 
-    const handleFilterChange = (e) => {
+    /*const handleFilterChange = (e) => {
         const filterValue = e.target.value;
         setStatusFilter(filterValue);
         setCurrentPage(1);
-    };
+    };*/
 
-    const handleSearchStatusChange = async (e) => {
+    /*const handleSearchStatusChange = async (e) => {
         setSearchStatus(e.target.value);
         setCurrentPage(1);
-    };
+    };*/
 
-    const handlePurchaseDetails = (id) => {
+    /*const handlePurchaseDetails = (id) => {
         navigate(`/admin/purchase-details/${id}`);
-    };
+    };*/
 
     return (
         <div className="admin-container">
