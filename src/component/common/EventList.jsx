@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import '../../style/eventList.css';
+
 
 
 const EventList = ({events}) => {
@@ -24,8 +25,10 @@ const EventList = ({events}) => {
     return(
         <div className="event-list">
                 {events.map((event, index) => {
+                    // ❌ DELETE these two lines if not used
                     const isInCart = cart.some(item => item.id === event.id);
                     const cartItem = cart.find(item => item.id === event.id);
+
                     return (
                         <div className="event-item" key={index}>                            <Link to={`/event/${event.id}`}>
                             <img src={event.imageUrl} alt={event.name} className="event-image" />

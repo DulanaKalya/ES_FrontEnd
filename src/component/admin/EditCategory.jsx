@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import ApiService from "../../service/ApiService";
 import { useNavigate, useParams } from "react-router-dom";
 import '../../style/addCategory.css'
+import React, { useState, useEffect, useCallback } from "react";
+
 
 const EditCategory = () => {
     const { categoryId } = useParams();
@@ -11,21 +13,22 @@ const EditCategory = () => {
 
 
     useEffect(() => {
-        fetchCategory(categoryId);
-    }, [categoryId])
+    fetchCategory();
+}, [fetchCategory]);
 
-    const fetchCategory = async () => {
-        try {
-            const response = await ApiService.getCategoryById(categoryId);
-            setName(response.category.name);
 
-        } catch (error) {
-            setMessage(error.response?.data?.message || error.message || "Failed to get a category by id")
-            setTimeout(() => {
-                setMessage('');
-            }, 3000)
-        }
+    const fetchCategory = useCallback(async () => {
+    try {
+        const response = await ApiService.getCategoryById(categoryId);
+        setName(response.category.name);
+    } catch (error) {
+        setMessage(error.response?.data?.message || error.message || "Failed to get a category by id");
+        setTimeout(() => {
+            setMessage('');
+        }, 3000);
     }
+}, [categoryId]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();

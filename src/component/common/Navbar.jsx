@@ -1,5 +1,5 @@
 // filepath: e:\EventSync\EventSync_frontend\src\component\common\Navbar.jsx
-import React, {useState} from "react";
+//import React, {useState} from "react";
 import '../../style/navbar.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import ApiService from "../../service/ApiService";
@@ -50,7 +50,10 @@ const Navbar = () => {
                 <NavLink to="/cart">Cart</NavLink>                {isAuthenticated && <NavLink to="/profile" >My Account</NavLink>}
                 {isAdmin && <NavLink to="/admin" >Admin</NavLink>}
                 {!isAuthenticated && <NavLink to="/login" >Login</NavLink>}
-                {isAuthenticated && <a href="#" onClick={handleLogout} className="navbar-logout">Logout</a>}
+                {isAuthenticated && <button onClick={handleLogout} className="navbar-logout" style={{ all: 'unset', cursor: 'pointer' }}>
+  Logout
+</button>
+}
                 <NavLink to="/about-us" >About Us</NavLink>
             </div>
         </nav>

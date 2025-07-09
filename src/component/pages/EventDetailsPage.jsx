@@ -1,8 +1,9 @@
-import React, {useEffect, useState} from "react";
+//import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import ApiService from "../../service/ApiService";
 import '../../style/eventDetailsPage.css';
+import React, { useEffect, useState, useCallback } from "react";
 
 
 const EventDetailsPage = () => {
@@ -11,18 +12,20 @@ const EventDetailsPage = () => {
     const {cart, dispatch} = useCart();
     const [event, setEvent] = useState(null);
 
-    useEffect(()=>{
-        fetchEvent();
-    }, [id])
+    useEffect(() => {
+    fetchEvent();
+}, [fetchEvent]);
 
-    const fetchEvent = async () => {
-        try {
-            const response = await ApiService.getEventById(id);
-            setEvent(response.event);
-        } catch (error) {
-            console.log(error.message || error)
-        }
+
+    const fetchEvent = useCallback(async () => {
+    try {
+        const response = await ApiService.getEventById(id);
+        setEvent(response.event);
+    } catch (error) {
+        console.log(error.message || error);
     }
+}, [id]);
+
 
     
     const addToCart = () => {

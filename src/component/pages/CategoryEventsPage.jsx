@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ApiService from "../../service/ApiService";
 import EventList from "../common/EventList";
 import Pagination from "../common/pagination";
 import '../../style/home.css'
+import React, { useState, useEffect, useCallback } from "react";
 
 
 const CategoryEventsPage = () => {
@@ -17,21 +18,21 @@ const CategoryEventsPage = () => {
 
 
     useEffect(() => {
-        fetchEvents();
-    }, [categoryId, currentPage]);
+    fetchEvents();
+}, [fetchEvents]); // ✅ fixed
 
-    const fetchEvents = async () => {
-        try {
 
-            const response = await ApiService.getAllEventsByCategoryId(categoryId);
-            const allEvents = response.eventList || [];
-            //console.log(allEvents);
-            setTotalPages(Math.ceil(allEvents.length / itemsPerPage));
-            setEvents(allEvents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
-        } catch (error) {
-            setError(error.response?.data?.message || error.message || 'unable to fetch events by category id')
-        }
+    const fetchEvents = useCallback(async () => {
+    try {
+        const response = await ApiService.getAllEventsByCategoryId(categoryId);
+        const allEvents = response.eventList || [];
+        setTotalPages(Math.ceil(allEvents.length / itemsPerPage));
+        setEvents(allEvents.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+    } catch (error) {
+        setError(error.response?.data?.message || error.message || 'Unable to fetch events by category id');
     }
+}, [categoryId, currentPage, itemsPerPage]); // ✅ all used variables
+
 
 
     return(

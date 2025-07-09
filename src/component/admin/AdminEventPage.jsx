@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../style/admin.css';
 import Pagination from "../common/pagination";
 import ApiService from "../../service/ApiService";
+import React, { useState, useEffect, useCallback } from "react";
+
 
 const AdminEventPage = () => {
     const navigate = useNavigate();
@@ -14,24 +16,26 @@ const AdminEventPage = () => {
     const itemsPerPage = 10;
 
 
-    const fetchEvents = async() => {
-        setLoading(true);
-        try {
-            const response = await ApiService.getAllEvents();
-            const eventList = response.eventList || [];
-            setTotalPages(Math.ceil(eventList.length/itemsPerPage));
-            setEvents(eventList.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage));
-            setError(null);
-        } catch (error) {
-            setError(error.response?.data?.message || error.message || 'Unable to fetch events');
-        } finally {
-            setLoading(false);
-        }
+    const fetchEvents = useCallback(async () => {
+    setLoading(true);
+    try {
+        const response = await ApiService.getAllEvents();
+        const eventList = response.eventList || [];
+        setTotalPages(Math.ceil(eventList.length / itemsPerPage));
+        setEvents(eventList.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage));
+        setError(null);
+    } catch (error) {
+        setError(error.response?.data?.message || error.message || 'Unable to fetch events');
+    } finally {
+        setLoading(false);
     }
+}, [currentPage, itemsPerPage]); // ✅ include all used state values
 
-    useEffect(()=>{
-        fetchEvents();
-    }, [currentPage]);
+
+    useEffect(() => {
+    fetchEvents();
+}, [fetchEvents]); // ✅ Correct
+
 
     const handleEdit = (id) => {
         navigate(`/admin/edit-event/${id}`);

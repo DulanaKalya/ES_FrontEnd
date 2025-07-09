@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+//import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import '../../style/admin.css';
 import Pagination from "../common/pagination";
 import ApiService from "../../service/ApiService";
+import React, { useState, useEffect, useCallback } from "react";
+
 
 const PurchaseStatus = ["PENDING", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED", "RETURNED"];
 
@@ -32,33 +34,14 @@ const AdminPurchasesPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetchPurchases();
-    }, [searchStatus, currentPage]);
+    fetchPurchases();
+}, [fetchPurchases]); // ✅ Now safe
 
-    const fetchPurchases = async () => {
-        setLoading(true);
-        try {
-            let response;
-            if(searchStatus) {
-                response = await ApiService.getAllBookEventsByStatus(searchStatus);
-            } else {
-                response = await ApiService.getAllPurchases();
-            }
-            const purchaseList = response.purchaseItemList || [];
 
-            setTotalPages(Math.ceil(purchaseList.length/itemsPerPage));
-            setPurchases(purchaseList);
-            setFilteredPurchases(purchaseList.slice((currentPage -1) * itemsPerPage, currentPage * itemsPerPage));
-            setError(null);
-        } catch (error) {
-            setError(error.response?.data?.message || error.message || 'Unable to fetch purchases');
-            setTimeout(() => {
-                setError('');
-            }, 5000);
-        } finally {
-            setLoading(false);
-        }
-    }
+    useEffect(() => {
+    fetchPurchases();
+}, [fetchPurchases]); // ✅ Now safe
+
 
     const handleFilterChange = (e) => {
         const filterValue = e.target.value;
