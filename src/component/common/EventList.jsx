@@ -26,8 +26,8 @@ const EventList = ({events}) => {
         <div className="event-list">
                 {events.map((event, index) => {
                     // ❌ DELETE these two lines if not used
-                    const isInCart = cart.some(item => item.id === event.id);
-                    const cartItem = cart.find(item => item.id === event.id);
+                    //const isInCart = cart.some(item => item.id === event.id);
+                    //const cartItem = cart.find(item => item.id === event.id);
 
                     return (
                         <div className="event-item" key={index}>                            <Link to={`/event/${event.id}`}>
