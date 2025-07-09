@@ -1,0 +1,204 @@
+.register-page {
+    max-width: 500px;
+    margin: 3rem auto 5rem;
+    padding: 2.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
+    animation: fadeIn 0.7s ease, slideUp 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    background-image: linear-gradient(
+        135deg, 
+        rgba(124, 58, 237, 0.07) 0%,
+        rgba(255, 255, 255, 0.4) 25%, 
+        rgba(20, 184, 166, 0.08) 50%,
+        rgba(255, 255, 255, 0.35) 75%,
+        rgba(249, 115, 22, 0.06) 100%
+    );
+}
+
+.register-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    z-index: 1;
+}
+
+.login-decoration, .register-decoration {
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    opacity: 0.2;
+    z-index: 0;
+    animation: pulse 6s ease-in-out infinite;
+}
+
+.register-decoration {
+    top: auto;
+    right: auto;
+    bottom: -70px;
+    left: -70px;
+    width: 140px;
+    height: 140px;
+    animation-delay: 1s;
+}
+
+.register-page h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.register-page h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    border-radius: 5px;
+}
+
+.register-form, .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.3rem;
+}
+
+.register-page label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.form-input {
+    padding: 1rem;
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius-md);
+    background: rgba(255, 255, 255, 0.7);
+    transition: all var(--transition-normal);
+    outline: none;
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-input::placeholder {
+    color: #aaa;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    padding: 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: var(--border-radius-md);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all var(--transition-normal);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+}
+
+.submit-btn:hover::before {
+    left: 100%;
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+.message {
+    text-align: center;
+    padding: 0.75rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius-md);
+    font-weight: 500;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.success-message {
+    color: var(--success-color);
+    background-color: rgba(34, 197, 94, 0.1);
+}
+
+.error-message {
+    color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.1);
+
+    animation: fadeIn 0.5s ease;
+}
+
+.register-link {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.register-link a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+    color: var(--primary-dark);
+
+    color: #8a1ef6;
+}
